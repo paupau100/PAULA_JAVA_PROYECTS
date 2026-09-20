@@ -70,10 +70,10 @@ static int[] vec = new int[10];
               System.out.println("Salario: "+ salary[pos]);
               System.out.println("Días Trabajados: "+ dwork[pos]);
               System.out.println("Días Pagados: "+ dpay[pos]);
-              System.out.println("¿Necesitas otra consulta?     1= Sí    0=No");
+              System.out.println("¿Necesitas otra consulta?     1 = Sí    0 = No");
               des = sc.nextInt();
           }while(des != 0);
-          
+          menu();
           }
     
         public static void modificar(){
@@ -89,15 +89,33 @@ static int[] vec = new int[10];
               dwork[pos]= sc.nextInt();
               System.out.println("Días Pagados: ");
               dpay[pos]= sc.nextDouble();
-              System.out.println("¿Necesitas otra consulta?     1= Sí    0=No");
+              System.out.println("¿Necesitas otra consulta?     1 = Sí    0 = No");
               des = sc.nextInt();
-                
-                }
-                
             }while(des != 0);
+            menu();
     }
 
           public static void eliminar(){
-              
+              do{
+                  System.out.println("Digite la poscicion que necesita borrar: ");
+              pos = sc.nextInt();
+              for(int i = pos;i < cantidad - 1;i++){
+                  name[i] = name[i + 1];
+                  surname[i] = surname[i + 1];
+                  salary[i] = salary[i + 1];
+                  dwork[i] = dwork[i + 1];
+                  dpay[i] = dpay[i + 1];
+              }
+              cantidad --; 
+              name[cantidad] = null;
+              surname[cantidad] = null;
+              salary[cantidad] = 0;
+              dwork[cantidad] = 0;
+              dpay[cantidad] = 0;
+               System.out.println("¿Deseas borrar otro registro?     1 = Si   0 = No");
+                  des = sc.nextInt();
+                  
+              }while(des != 0);
+              menu();
     }
 }
