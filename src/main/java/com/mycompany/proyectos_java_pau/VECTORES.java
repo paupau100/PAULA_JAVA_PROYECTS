@@ -56,6 +56,7 @@ static int[] vec = new int[10];
             System.out.println("Digit the days worked: ");
             dwork[i]=sc.nextInt();
             tp[i]= (salary[i]/30)*dwork[i];
+            System.out.println("Total pagado:" +tp[i]);
                     }
             menu(); 
     }
@@ -75,7 +76,7 @@ static int[] vec = new int[10];
         case 1:
             for(int i = 0 ; i < cantidad;i++){
                 System.out.printf("Name   "+"Surname   "+"Salary   "+"Days worked   "+ "Total a pagar   ");
-                System.out.printf(name[pos]+   surname[pos]   +salary[pos]   +dwork[pos]   +tp[pos]);
+                System.out.println(name[pos]+   surname[pos]   +salary[pos]   +dwork[pos]   +tp[pos]);
                 }
                     break;
     }
