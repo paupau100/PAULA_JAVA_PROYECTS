@@ -439,10 +439,14 @@ public class ejercicionomina {
                     for (int i = 0; i < empleados.size(); i++) {
 
                         Object[] r = empleados.get(i);
+                        String nombre= (String)r[NOMBRE];
+                        if (nombre.length() > 20) {
+                            nombre = nombre.substring(0, 17) + "...";
+                        }
 
                         System.out.printf(co, "%-4d %-20s %-12s %,14.2f %6d %,14.2f %,12.2f%n",
 
-                                i, r[NOMBRE], r[CEDULA], (Double) r[SALARIO],
+                                i, nombre, r[CEDULA], (Double) r[SALARIO],
 
                                 (Integer) r[DIAS], (Double) r[TOTAL_PAGAR], (Double) r[VALOR_DIA]);
 
