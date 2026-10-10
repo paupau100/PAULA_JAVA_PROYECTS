@@ -89,6 +89,7 @@ public class ejercicionomina {
     static final int VALOR_DIA = 5;
 
     static final int DIAS_MES = 30;
+    static double total_nom;
 
     static ArrayList<Object[]> empleados = new ArrayList<>();   // nace vacío: sin datos precargados
 
@@ -151,6 +152,8 @@ public class ejercicionomina {
             System.out.println("3. Modificar un dato de un registro");
 
             System.out.println("4. Eliminar");
+            
+            System.out.println("5. Total de la Nómina");
 
             System.out.println("0. Salir");
 
@@ -182,6 +185,10 @@ public class ejercicionomina {
 
                     eliminar();
 
+                    break;
+                    
+                case 5:
+                    total_nom();
                     break;
 
                 case 0:
@@ -278,10 +285,11 @@ public class ejercicionomina {
  
             // Salario: número mayor que 0
 
-            double salario;
+            double salario = 0.0;
+            boolean valido = false;
 
             do {
-
+                try{
                 System.out.print("Salario mensual: ");
 
                 salario = Double.parseDouble(sc.nextLine().trim());
@@ -289,35 +297,45 @@ public class ejercicionomina {
                 if (salario <= 0) {
 
                     System.out.println("  El salario debe ser mayor que 0.");
-
+                }else{
+                    valido = true;
                 }
-
-            } while (salario <= 0);
+                }catch (NumberFormatException e){
+                    System.out.println("Error: Ingrese un número válido");
+                }
+            } while (!valido);
  
             // Días trabajados: entero entre 0 y 30
 
-            int dias;
+            int dias= 0;
+            valido=false;
 
             do {
 
+                try{
                 System.out.print("Días trabajados en el mes (0-30): ");
 
                 dias = Integer.parseInt(sc.nextLine().trim());
+                
 
                 if (dias < 0 || dias > DIAS_MES) {
 
                     System.out.println("  Valor inválido: debe estar entre 0 y 30.");
-
+                }else{
+                    valido=true;
+                }
+                }catch (NumberFormatException e){
+                    System.out.println("Error:Ingrese un valor válido");
                 }
 
-            } while (dias < 0 || dias > DIAS_MES);
+            } while (!valido);
  
             // Campos calculados: no se piden por teclado, se derivan del salario y los días
 
             double valorDia = Math.round((salario / DIAS_MES) * 100) / 100.0;
 
             double totalPagar = Math.round(valorDia * dias * 100) / 100.0;
- 
+
             // Se arma el registro completo y se agrega en UNA sola operación
 
             Object[] registro = new Object[6];
@@ -365,7 +383,7 @@ public class ejercicionomina {
         int opcionConsulta;
 
         do {
-
+        
             System.out.println("\n--- CONSULTAR ---");
 
             System.out.println("Registros cargados: " + empleados.size());
@@ -377,7 +395,8 @@ public class ejercicionomina {
             System.out.println("3. Regresar al menú");
 
             System.out.print("Seleccione una opción: ");
-
+            
+            
             opcionConsulta = Integer.parseInt(sc.nextLine().trim());
  
             if (opcionConsulta == 1) {
@@ -393,6 +412,8 @@ public class ejercicionomina {
                     System.out.print("Ingrese la posición a consultar (0 a "
 
                             + (empleados.size() - 1) + "): ");
+                }
+                        
 
                     int pos = Integer.parseInt(sc.nextLine().trim());
 
@@ -419,10 +440,9 @@ public class ejercicionomina {
                         System.out.printf(co, "%s : $%,.2f%n", NOMBRE_CAMPO[VALOR_DIA], (Double) r[VALOR_DIA]);
 
                     }
-
-                }
+                
  
-            } else if (opcionConsulta == 2) {
+            }else if (opcionConsulta == 2) {
 
                 // --- Consulta de todos: tabla completa ---
 
@@ -483,19 +503,23 @@ public class ejercicionomina {
             return;
 
         }
-
+        
+        int pos = -1;
+try{
         System.out.print("Ingrese la posición del registro a modificar (0 a "
 
                 + (empleados.size() - 1) + "): ");
-
-        int pos = Integer.parseInt(sc.nextLine().trim());
-
-        if (pos < 0 || pos >= empleados.size()) {
-
+                
+        pos = Integer.parseInt(sc.nextLine().trim());
+        }catch(NumberFormatException e){
+            System.out.println("Error: Ingrese un número válido");
+        return;
+        }
+        if (pos <= 0 && pos < empleados.size()) {
+        
             System.out.println("Posición fuera de rango.");
 
             return;
-
         }
 
         Object[] registro = empleados.get(pos);
@@ -760,6 +784,19 @@ public class ejercicionomina {
  
         } while (opcionEliminar != 3);
 
+    }
+    static void total_nom(){
+        double total_nomina = 0;
+        if (empleados.isEmpty()){
+            System.out.println("No hay Empleados para sumar la nómina");
+        }else{
+            for(int i = 0;i < empleados.size();i++){
+                total_nomina += (Double) empleados.get(i) [TOTAL_PAGAR];
+                
+            }
+              System.out.printf(co, "%s : $%,.2f%n", NOMBRE_CAMPO[TOTAL_PAGAR],total_nomina);  
+        }
+    
     }
 
 }
