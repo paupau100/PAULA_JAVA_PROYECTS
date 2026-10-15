@@ -1,4 +1,3 @@
-
 import java.util.ArrayList; //Importamos listas dinámicas 
 
 import java.util.Locale; //Formatos texto o número según región
@@ -110,8 +109,88 @@ public class Entidad_Bancaria{
                         repetida = true;
                     }
                 }
+                if (cedula.isEmpty())   {
+                    System.out.println("Este campo no puede estar vacío");
+                    
+                }else if (repetida) {
+                    
+                    System.out.println("Actualmente existe un registro con esa cédula");
+                }
+            } while (cedula.isEmpty() || repetida);
+            
+            int opcServicio;
+            String tipoServicio;
+            
+            do {
+            
+            System.out.println("------- Menú -------");
+            System.out.println("Por favor elija un servicicio: ");
+            System.out.println("1. Cuenta de Ahorros");
+            System.out.println("2. Cuenta Corriente");
+            System.out.println("3. Crédito");
+            System.out.println("4. Préstamo");
+            
+            opcServicio = Integer.parseInt(sc.nextLine().trim());
+            
+            switch (opcServicio)    {
+                case 1:
+                    
+                    tipoServicio = "Cuenta de Ahorros";
+                    break;
+                    
+                case 2:
+                    tipoServicio = "Cuenta Corriente";
+                    break;
+                    
+                case 3:
+                    tipoServicio = "Crédito";
+                    break;
+                    
+                    
+                case 4:
+                    tipoServicio = "Préstamo";
+                    break;
+                    
+                case 0:
+                    System.out.println("Cierre del programa...");
+                    break;
+                    
+                    
+                default:
+                    System.out.println("Opción no válida upss");
+            }
+            
+            } while (opcServicio > 4 || opcServicio < 0);
+            
+            System.out.println("Por favor escribir el monto ");
+            double monto = Double.parseDouble(sc.nextLine().trim());
+            
+            
+        
+        
+ 
+        
+        }while();
                 
-        }
-        }
+    
+    
+    
+    
+    
+    static void tot_usuarios()  {
+        
     }
+    
+    static void sum_servicio()  {
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
